@@ -12,18 +12,21 @@
 
 #include "get_next_line.h"
 
-int main(void)
+int	main(void)
 {
-    int fd = open("test_file.txt", O_RDONLY); //abre o arquivo só para leitura
-    if (fd == -1)
-        return (1); //erro ao abrir
-    char *line = get_next_line(fd);
-    while (line)
-    {
-        printf("%s", line); // imprime a linha, já vem como \n
-        free(line);
-        line = get_next_line(fd);
-    }
-    close(fd);
-    return (0);
+	char	*line;
+	int		fd;
+
+	fd = open("test_file.txt", O_RDONLY);
+	if (fd == -1)
+		return (1);
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (0);
 }

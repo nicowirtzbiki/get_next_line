@@ -6,16 +6,11 @@
 /*   By: nico <nico@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 20:29:21 by nico              #+#    #+#             */
-/*   Updated: 2025/11/16 10:21:10 by nico             ###   ########.fr       */
+/*   Updated: 2025/11/17 12:19:17 by nico             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-//strlen // ver o tamanho do stash e do buffer, pra passar pro strjoin 
-//strjoin // juntar stash e buffer.
-//strchr // buscar o \n dentro do stash
-//substr // copiar 
 
 size_t	ft_strlen(const char *s)
 {
