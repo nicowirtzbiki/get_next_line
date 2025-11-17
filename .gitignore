@@ -1,0 +1,25 @@
+#Arquivos Objeto
+*.o
+
+#Funcao compilada
+get_next_line.a
+
+#Executáveis de teste
+test
+a.out
+
+#Arquivos temporários de compilacão
+*.gch
+*.exe
+
+# IDE / editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# MacOS
+.DS_Store
+
+# Logs
+*.log
