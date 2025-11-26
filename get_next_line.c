@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nico <nico@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nwirtzbi <nwirtzbi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 09:57:07 by nico              #+#    #+#             */
-/*   Updated: 2025/11/20 16:44:29 by nico             ###   ########.fr       */
+/*   Updated: 2025/11/26 18:23:02 by nwirtzbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 char	*read_and_update_stash(int fd, char *buffer, char *stash)
 {
-	size_t	bytes_read;
+	ssize_t	bytes_read;
 	char	*tmp;
 
 	bytes_read = 1;
 	while (bytes_read > 0 && (!stash || !ft_strchr(stash, '\n')))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read <= 0)
+		if (bytes_read < 0)
+		{
+			free(stash);
+			return (NULL);
+		}
+		if (bytes_read == 0)
 			return (stash);
 		buffer[bytes_read] = '\0';
 		if (!stash)
