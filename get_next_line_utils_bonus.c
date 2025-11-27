@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nico <nico@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 20:29:21 by nico              #+#    #+#             */
-/*   Updated: 2025/11/27 21:59:50 by nico             ###   ########.fr       */
+/*   Created: 2025/11/27 21:40:25 by nico              #+#    #+#             */
+/*   Updated: 2025/11/27 22:39:35 by nico             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -23,22 +23,6 @@ size_t	ft_strlen(const char *str)
 		len++;
 	return (len);
 }
-
-// char	*ft_calloc(size_t nmemb, size_t size)
-// {
-// 	char	*ptr;
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (nmemb != 0 && size > SIZE_MAX / nmemb)
-// 		return (NULL);
-// 	ptr = malloc (size * nmemb);
-// 	if (!ptr)
-// 		return (NULL);
-// 	while (i < nmemb * size)
-// 		ptr[i++] = 0;
-// 	return (ptr);
-// }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

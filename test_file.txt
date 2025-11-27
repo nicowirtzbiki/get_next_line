@@ -1,7 +1,8 @@
 Primeira linha do arquivo.
 Segunda linha — com um pouco mais de texto.
-Terceira linha.
+Terceira\nlinha.
 
 Quinta linha. Esta é uma linha extremamente longa que deve ocupar mais de um buffer de leitura se o BUFFER_SIZE for pequeno, por exemplo, 10.
 Sexta linha também bem longa para garantir que o comportamento se repete de forma consistente.
 Sétima linha: teste de fim de arquivo sem quebra de linha no final
+

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nico <nico@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 09:57:07 by nico              #+#    #+#             */
-/*   Updated: 2025/11/27 22:20:05 by nico             ###   ########.fr       */
+/*   Created: 2025/11/27 18:55:40 by nico              #+#    #+#             */
+/*   Updated: 2025/11/27 22:33:07 by nico             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*join_and_free(char *stash, char *buffer)
 {
@@ -86,46 +86,55 @@ static char	*update_stash(char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash = read_and_update_stash(fd, stash);
-	if (!stash)
+	stash[fd] = read_and_update_stash(fd, stash[fd]);
+	if (!stash[fd])
 		return (NULL);
-	line = extract_line(stash);
+	line = extract_line(stash[fd]);
 	if (!line)
 	{
-		free(stash);
-		stash = NULL;
+		free(stash[fd]);
+		stash[fd] = NULL;
 		return (NULL);
 	}
-	stash = update_stash(stash);
-	if (stash && stash[0] == 0)
+	stash[fd] = update_stash(stash[fd]);
+	if (stash[fd] && stash[fd][0] == 0)
 	{
-		free(stash);
-		stash = NULL;
+		free(stash[fd]);
+		stash[fd] = NULL;
 	}
 	return (line);
 }
 
 
-// int	main(void)
-// {
-// 	char	*line;
-// 	int		fd;
+int	main(void)
+{
+	char	*line1;
+	char	*line2;
+	int		fd1 = open("test_file.txt", O_RDONLY);
+	int		fd2 = open("test_file2.txt", O_RDONLY);
 
-// 	fd = open("test_file.txt", O_RDONLY);
-// 	if (fd == -1)
-// 		return (1);
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// 	close(fd);
-// 	return (0);
-// } 
+	if (fd1 < 0 || fd2 < 0)
+    {
+		printf("Erro ao abrir ficheiros!");
+		return (1);
+    }
+	line1 = get_next_line(fd1);
+	line2 = get_next_line(fd2);
+	while (line1 || line2)
+	{
+		printf("%s", line1);
+		printf("%s", line2);
+		free(line1);
+		free(line2);
+		line1 = get_next_line(fd1);
+		line2 = get_next_line(fd2);
+	}
+	close(fd1);
+	close(fd2);
+	return (0);
+} 

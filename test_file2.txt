@@ -1,0 +1,5 @@
+(>>>)OPA! Linha 1 do segundo arquivo.
+(>>>)OPA! Linha 2 do segundo arquivo.
+(>>>)OPA! Linha 3 do segundo arquivo.
+(>>>)OPA! Linha 4 do segundo arquivo.
+(>>>)OPA! Linha 5 do segundo arquivo.
