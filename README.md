@@ -1,31 +1,34 @@
-## Descrição
+# get_next_line
 
-`get_next_line` devolve a próxima linha disponível no fluxo associado a um **descritor de ficheiro** (ficheiro, STDIN, socket, pipe, …). Cada chamada lê o que for necessário do FD, acumula em memória e retorna exatamente **uma linha**, **incluindo o `\n` final** quando existente. Ao chegar ao EOF sem `\n`, devolve a última linha sem `\n`.
+A minimal, robust implementation of line-by-line file reading in C.
 
-> Este comportamento segue os requisitos típicos do projeto 42 _get_next_line_, incluindo o uso de variável(‑eis) estática(s) para manter estado entre chamadas.
+## Overview
 
-### Contratos da função
+`get_next_line` returns the next line available from a given **file descriptor** (file, STDIN, pipe, socket, …). 
+Each call reads as much data as needed from the FD, stores incomplete data between calls, and returns exactly **one line**, **including the trailing `\n**` when present.
+If the end of file is reached without a final newline `\n`, get_next_line returns the last line without a `\n`.
 
-- **Entrada**: `fd` válido e aberto para leitura.
-- **Saída**: ponteiro para _string_ alocada com a próxima linha lida do `fd`.
-- **Formato da linha**:
+> This behavior follows the official requirements of the 42 project get_next_line, including the use of static storage to maintain state across calls.
 
-  - Se a linha no ficheiro termina com `\n`, a _string_ devolvida **inclui** esse `\n`.
-  - Na última linha, se o ficheiro termina em EOF sem `\n`, a _string_ **não** inclui `\n`.
+### Function Contract
 
-- **Persistência**: entre chamadas, o estado não consumido mantém-se em memória (estático) para concluir linhas seguintes.
+- **Input**: A valid file descriptor`fd` opened for reading.
+- **Output**: A pointer to a newly allocated C-string containing the next line from `fd`:
+  - If the line ends with `\n`, the returned _string_ **includes** that `\n`.
+  - If the file ends without a trailing newline `\n`, the returned _string_ does **not** include `\n`.
 
-### Erros e retorno
+- **Internal Persistence**: get_next_line uses a **static stash** to hold leftover data between function calls. This allows reconstruction of lines that span multiple read() operations.
 
-- **`NULL`** se:
+### Error Handling and Return
 
-  - `fd` é inválido;
-  - ocorre erro em `read(2)`;
-  - não há mais dados a ler (EOF) **e** não existe conteúdo por devolver.
+- `get_next_line` returns **`NULL`** if:
 
-- Em caso de sucesso, retorna uma _string_ alocada (depois o utilizador deve chamar `free()`).
+  - `fd` is invalid;
+  - A `read()` error occurs;
+  - End of file is reached (EOF) **and** no buffer data remains.
 
----
+- If successful, it returns an allocated _string_ (then the user must call `free()`).
 
-- declarar buffer e inicializar ele com zeros (porque..)
-- declarar static
+### Multi-FD Support (Bonus)
+
+On get_next_line_bonus.c, a static stash is maintained per FD, via an array indexed by file descriptor.
