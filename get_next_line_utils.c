@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nico <nico@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nwirtzbi <nwirtzbi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 20:29:21 by nico              #+#    #+#             */
-/*   Updated: 2025/11/27 21:59:50 by nico             ###   ########.fr       */
+/*   Created: 2025/11/07 20:29:21 by nwirtzbi          #+#    #+#             */
+/*   Updated: 2025/11/28 10:28:34 by nwirtzbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,13 @@ size_t	ft_strlen(const char *str)
 {
 	size_t	len;
 
-	if (!str || *str == 0)
+	if (!str)
 		return (0);
 	len = 0;
 	while (str[len])
 		len++;
 	return (len);
 }
-
-// char	*ft_calloc(size_t nmemb, size_t size)
-// {
-// 	char	*ptr;
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (nmemb != 0 && size > SIZE_MAX / nmemb)
-// 		return (NULL);
-// 	ptr = malloc (size * nmemb);
-// 	if (!ptr)
-// 		return (NULL);
-// 	while (i < nmemb * size)
-// 		ptr[i++] = 0;
-// 	return (ptr);
-// }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -69,7 +53,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 size_t	has_newline(char *str)
 {
-	size_t len;
+	size_t	len;
 
 	if (!str)
 		return (0);

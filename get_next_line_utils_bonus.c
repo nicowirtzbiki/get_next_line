@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nico <nico@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nwirtzbi <nwirtzbi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/27 21:40:25 by nico              #+#    #+#             */
-/*   Updated: 2025/11/27 22:39:35 by nico             ###   ########.fr       */
+/*   Created: 2025/11/27 21:40:25 by nwirtzbi          #+#    #+#             */
+/*   Updated: 2025/11/28 09:56:20 by nwirtzbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 size_t	has_newline(char *str)
 {
-	size_t len;
+	size_t	len;
 
 	if (!str)
 		return (0);

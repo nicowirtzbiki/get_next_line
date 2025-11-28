@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nico <nico@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nwirtzbi <nwirtzbi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/27 21:39:57 by nico              #+#    #+#             */
-/*   Updated: 2025/11/27 21:40:07 by nico             ###   ########.fr       */
+/*   Created: 2025/11/27 21:39:57 by nwirtzbi          #+#    #+#             */
+/*   Updated: 2025/11/28 11:41:13 by nwirtzbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <unistd.h> // for read, close
 # include <stdlib.h> // for malloc, free
 # include <fcntl.h>  // for open
 # include <stdio.h>  // for printf (testing purposes)
-# include <limits.h> // OPEN_MAX
+# include <limits.h> // FOPEN_MAX
 // Define um valor padrão se o BUFFER_SIZE não for passado na compilação
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

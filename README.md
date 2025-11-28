@@ -27,5 +27,5 @@
 
 ---
 
-- declarar buffer e inicializar ele comzeeros (porque..)
+- declarar buffer e inicializar ele com zeros (porque..)
 - declarar static

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nico <nico@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nwirtzbi <nwirtzbi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 09:57:07 by nico              #+#    #+#             */
-/*   Updated: 2025/11/27 22:20:05 by nico             ###   ########.fr       */
+/*   Created: 2025/11/18 09:57:07 by nwirtzbi          #+#    #+#             */
+/*   Updated: 2025/11/28 12:05:20 by nwirtzbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*join_and_free(char *stash, char *buffer)
 {
-	char *updated_stash;
+	char	*updated_stash;
 
 	updated_stash = ft_strjoin(stash, buffer);
 	if (!updated_stash)
@@ -22,6 +22,7 @@ static char	*join_and_free(char *stash, char *buffer)
 		free(stash);
 		return (NULL);
 	}
+	free(stash);
 	return (updated_stash);
 }
 
@@ -36,7 +37,7 @@ static char	*read_and_update_stash(int fd, char *stash)
 	if (!buffer)
 		return (NULL);
 	i = 0;
-	while (i <= BUFFER_SIZE)
+	while (i < BUFFER_SIZE + 1)
 		buffer[i++] = 0;
 	while (bytes_read > 0 && !has_newline(stash))
 	{
@@ -69,7 +70,7 @@ static char	*extract_line(char *stash)
 static char	*update_stash(char *stash)
 {
 	size_t	index;
-	char	*new_stash; 
+	char	*new_stash;
 
 	index = 0;
 	while (stash[index] && stash[index] != '\n')
@@ -94,13 +95,11 @@ char	*get_next_line(int fd)
 	stash = read_and_update_stash(fd, stash);
 	if (!stash)
 		return (NULL);
+	if (stash[0] == 0)
+		return (free(stash), stash = NULL, NULL);
 	line = extract_line(stash);
 	if (!line)
-	{
-		free(stash);
-		stash = NULL;
-		return (NULL);
-	}
+		return (free(stash), stash = NULL, NULL);
 	stash = update_stash(stash);
 	if (stash && stash[0] == 0)
 	{
@@ -110,13 +109,12 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-
 // int	main(void)
 // {
 // 	char	*line;
 // 	int		fd;
 
-// 	fd = open("test_file.txt", O_RDONLY);
+// 	fd = open("test_empty.txt", O_RDONLY);
 // 	if (fd == -1)
 // 		return (1);
 // 	line = get_next_line(fd);
